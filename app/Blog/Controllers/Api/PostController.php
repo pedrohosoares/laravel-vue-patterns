@@ -2,15 +2,20 @@
 
 namespace App\Blog\Controllers\Api;
 
+use App\Blog\Models\Post;
 use App\Blog\Services\PostService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Posts\PostRequest;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Traits\ApiResponseJson;
 use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
+
+    use ApiResponseJson;
 
     protected $postService;
 
@@ -28,30 +33,11 @@ class PostController extends Controller
     {
         try {
             $response = $this->postService->getAllPosts($request->all());
-            return response()->json(
-                [
-                    'success'=>true,
-                    'data'=>$response
-                ],200
-            );    
+            return $this->successResponse($response);
         } catch (Exception $th) {
-            return response()->json(
-                [
-                    'success'=>false,
-                    'data'=>$th->getMessage()
-                ],500
-            );  
+            return $this->errorResponse($th->getMessage());  
         }
         
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
     }
 
     /**
@@ -60,9 +46,14 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        try {
+            $response = $this->postService->createPost($request->all());
+            return $this->successResponse($response); 
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage()); 
+        }
     }
 
     /**
@@ -71,20 +62,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $params,int $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $response = $this->postService->getPostById($id);
+        try {
+            return $this->successResponse($response);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage()); 
+        }
     }
 
     /**
@@ -94,9 +79,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $data, $id)
     {
-        //
+        try {
+            $response = $this->postService->updatePost($id,$data);
+            return $this->successResponse($response);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage()); 
+        }
     }
 
     /**
@@ -105,8 +95,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id) : object
     {
-        //
+        try {
+            $response = $this->postService->deletePost($id);
+            return $this->successResponse($response);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage()); 
+        }
     }
 }

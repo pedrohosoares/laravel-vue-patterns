@@ -6,16 +6,16 @@ use App\Blog\Models\Post;
 
 class PostRepository
 {
-    public function getAll() : object
+    public function getAll(string $params = '',int $paginate = 15) : object
     {
-        return Post::all();
+        $posts = new Post;
+        $posts = $posts->paginate($paginate);
+        return $posts;
     }
 
-    public function getSpecific(object $request) : object
+    public function getSpecific(int $id) : object
     {
-        return Post::where('title','like','%'.$request['title'].'%')
-        ->orWhere('id',$request['id'])
-        ->first();
+        return Post::find($id);
     }
 
     public function destroy(int $id)
@@ -23,12 +23,12 @@ class PostRepository
         return Post::destroy($id);
     }
 
-    public function create(object $data) : object
+    public function create(array $data) : object
     {
         return Post::create($data);
     }
 
-    public function update(object $data,int $id) : object
+    public function update(int $id,array $data) : object
     {
         $post = Post::find($id);
         $post->update($data);

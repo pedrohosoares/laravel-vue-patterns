@@ -3,6 +3,7 @@
 namespace App\Blog\Services;
 
 use App\Blog\Repositories\PostRepository;
+use Illuminate\Support\Facades\DB;
 
 class PostService
 {
@@ -18,23 +19,40 @@ class PostService
         return $this->postRepository->getAll();
     }
 
-    public function getPostById()
+    public function getPostById(int $id) : object
     {
-
+        return $this->postRepository->getSpecific($id);
     }
 
-    public function createPost()
+    public function createPost(array $data) 
     {
-
+        DB::beginTransaction();
+        try {
+            return $this->postRepository->create($data);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
-    public function updatePost()
+    public function updatePost(int $id, object $data)
     {
-
+        DB::beginTransaction();
+        try {
+            $data = $data->toArray();
+            return $this->postRepository->update($id,$data);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
-    public function deletePost()
+    public function deletePost(int $id)
     {
-
+        try {
+            return $this->postRepository->destroy($id);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }
