@@ -8,11 +8,6 @@ use Tests\TestCase;
 
 class PostControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     // php artisan test --filter test_getPostsPage
     public function test_getPostsPage()
     {

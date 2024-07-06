@@ -21,7 +21,7 @@ class PostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'content'=>'required|string|min:15',
@@ -34,7 +34,7 @@ class PostRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'content.required'=>'O texto do post é obrigatório',

@@ -14,6 +14,11 @@ class Category extends Model
         'user_id'
     ];
 
+    public static function newFactory()
+    {
+        return \Database\Factories\CategoryFactory::new();
+    }
+
     public function posts(): BelongsToMany
     {
         return $this->belongsToMany(Post::class, 'post_categories');
