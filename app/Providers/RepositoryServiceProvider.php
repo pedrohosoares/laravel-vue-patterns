@@ -16,12 +16,6 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(PostRepository::class, function ($app) {
-            return new PostRepository();
-        });
-        $this->app->singleton(CategoryRepository::class, function ($app) {
-            return new CategoryRepository();
-        });
     }
 
     /**

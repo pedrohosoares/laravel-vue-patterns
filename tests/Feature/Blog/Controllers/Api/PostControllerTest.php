@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Blog\Controllers\Api;
 
+use App\Blog\Models\Category;
 use App\Blog\Models\Post;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -59,6 +60,9 @@ class PostControllerTest extends TestCase
     public function test_createPost()
     {   
         $data = Post::factory()->make()->toArray();
+        $categories = Category::factory()->count(4)->create();
+        $categories = $categories->map(function($value){return $value['id'];})->toArray();
+        $data['categories_id'] = $categories;
         $response = $this->post('/api/v1/posts',$data);
         $response->assertStatus(200);
         $this->assertDatabaseHas('posts', [

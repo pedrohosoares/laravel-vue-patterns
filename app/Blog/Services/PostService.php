@@ -28,12 +28,15 @@ class PostService
     {
         DB::beginTransaction();
         try {
-            return $this->postRepository->create($data);
+            $post = $this->postRepository->create($data);
+            $categories = $this->postRepository->attachCategories($post,$data['categories_id']);
+            return $post;
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;
         }
     }
+
 
     public function updatePost(int $id, object $data)
     {
