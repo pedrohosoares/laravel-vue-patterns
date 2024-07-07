@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Web\CategoryController;
+use App\Http\Controllers\Web\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    return view('home');
+})->name('home');
+Route::get('/posts/{id}',[PostController::class,'show'])->name('posts.show');
+Route::get('/categories/{id}',[CategoryController::class,'show'])->name('categories.show');

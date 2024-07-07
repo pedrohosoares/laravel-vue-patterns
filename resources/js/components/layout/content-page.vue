@@ -16,10 +16,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <menu-categories></menu-categories>
+                    <menu-categories :id="cat_id"></menu-categories>
                 </div>
                 <div class="col-md-9">
-                    <posts></posts>
+                    <posts :category="category"></posts>
                 </div>
             </div>
         </div>
@@ -28,5 +28,9 @@
 <script>
 export default {
     name: "content-page",
+    props:{
+        cat_id: String,
+        category: String
+    }
 };
 </script>

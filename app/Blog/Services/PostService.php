@@ -14,9 +14,19 @@ class PostService
         $this->postRepository = $postRepository;
     }
 
-    public function getAllPosts()
+    public function getAllPosts($request)
+    {   
+        return $this->postRepository->getAll($request);
+    }
+
+    public function getPostBySlug(string $slug) : object
     {
-        return $this->postRepository->getAll();
+        return $this->postRepository->getSpecificBySlug($slug);
+    }
+
+    public function getSpecificByCategory(int $categoryId) : object
+    {
+        return $this->postRepository->getSpecificByCategory($categoryId);
     }
 
     public function getPostById(int $id) : object

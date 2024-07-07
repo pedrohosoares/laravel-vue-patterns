@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Blog\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
 use App\Blog\Services\CategoryService;
 use App\Http\Controllers\Controller;

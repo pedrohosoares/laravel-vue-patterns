@@ -6,16 +6,34 @@ use App\Blog\Models\Post;
 
 class PostRepository
 {
-    public function getAll(string $params = '', int $paginate = 15): object
+    public function getAll(array $params = [], int $paginate = 15): object
     {
         $posts = new Post;
+        if(!empty($params['category']))
+        {
+            $posts = $posts->whereHas('categories', function($query) use ($params) {
+                $query->where('categories.id', $params['category']);
+            });
+        }
         $posts = $posts->paginate($paginate);
         return $posts;
     }
 
     public function getSpecific(int $id): object
     {
-        return Post::find($id);
+        return Post::with(['categories'])->find($id);
+    }
+
+    public function getSpecificBySlug(string $slug): object
+    {
+        return Post::with(['categories'])->where('slug',$slug)->first();
+    }
+
+    public function getSpecificByCategory(int $id): object
+    {
+        return Post::whereHas('categories', function($query) use ($id) {
+            $query->where('id', $id);
+        })->get();
     }
 
     public function destroy(int $id)

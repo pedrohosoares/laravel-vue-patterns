@@ -7,7 +7,7 @@
                 </div>
                 <article class="card-body">
                     <p>{{ post.resume }}..</p>
-                    <a href="/"
+                    <a :href="'/posts/' + post.slug"
                         type="button"
                         class="btn btn-lg btn-block btn-outline-primary"
                     >
@@ -25,14 +25,19 @@
 import axios from 'axios';
 export default {
     name: "posts",
+    props:{
+        category: String
+    },      
     data() {
         return {
             articles_data: [],
+            url:''
         };
     },
     methods: {
         async getPosts() {
-            const data = await axios.get("/api/v1/posts");
+            this.url = (this.category == 'null') ? '/api/v1/posts' : '/api/v1/posts?category='+this.category;
+            const data = await axios.get(this.url);
             this.articles_data = data.data.data.data;
         },
     },

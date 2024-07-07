@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     @include('layout.header')
-    <body>
+    <body class="antialiased">
         <main id="app">
-            <main-menu home="{{ route('home') }}"></main-menu>
-            <content-page cat_id="null" category="null"></content-page>
+            <main-menu></main-menu>
+            <post slug="{{ $slug }}"></post>
             <footer-page></footer-page>
         </main>
         <script src="{{ mix('js/app.js') }}"></script>

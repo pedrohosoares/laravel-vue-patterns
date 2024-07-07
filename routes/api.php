@@ -1,7 +1,7 @@
 <?php
 
-use App\Blog\Controllers\Api\CategoryController;
-use App\Blog\Controllers\Api\PostController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
+    Route::get('/posts/{slug}',[PostController::class,'showBySlug'])->name('posts.getBySlug');
     Route::resource('/posts',PostController::class); 
     Route::resource('/categories',CategoryController::class);    
 });

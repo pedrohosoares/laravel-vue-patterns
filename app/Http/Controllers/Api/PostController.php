@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Blog\Controllers\Api;
+namespace App\Http\Controllers\Api;
 
 use App\Blog\Models\Post;
 use App\Blog\Services\PostService;
@@ -29,15 +29,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) : JsonResponse
+    public function index(Request $request): JsonResponse
     {
         try {
             $response = $this->postService->getAllPosts($request->all());
             return $this->successResponse($response);
         } catch (Exception $th) {
-            return $this->errorResponse($th->getMessage());  
+            return $this->errorResponse($th->getMessage());
         }
-        
     }
 
     /**
@@ -50,9 +49,9 @@ class PostController extends Controller
     {
         try {
             $response = $this->postService->createPost($request->all());
-            return $this->successResponse($response); 
+            return $this->successResponse($response);
         } catch (\Throwable $th) {
-            return $this->errorResponse($th->getMessage()); 
+            return $this->errorResponse($th->getMessage());
         }
     }
 
@@ -62,13 +61,33 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $params,int $id)
+    public function show(Request $params, int $id)
     {
         $response = $this->postService->getPostById($id);
         try {
             return $this->successResponse($response);
         } catch (\Throwable $th) {
-            return $this->errorResponse($th->getMessage()); 
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    public function showBySlug(string $slug)
+    {
+        $response = $this->postService->getPostBySlug($slug);
+        try {
+            return $this->successResponse($response);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
+        }
+    }
+
+    public function getSpecificByCategory(int $catId)
+    {
+        $response = $this->postService->getSpecificByCategory($catId);
+        try {
+            return $this->successResponse($response);
+        } catch (\Throwable $th) {
+            return $this->errorResponse($th->getMessage());
         }
     }
 
@@ -82,10 +101,10 @@ class PostController extends Controller
     public function update(PostRequest $data, $id)
     {
         try {
-            $response = $this->postService->updatePost($id,$data);
+            $response = $this->postService->updatePost($id, $data);
             return $this->successResponse($response);
         } catch (\Throwable $th) {
-            return $this->errorResponse($th->getMessage()); 
+            return $this->errorResponse($th->getMessage());
         }
     }
 
@@ -95,13 +114,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id) : object
+    public function destroy(int $id): object
     {
         try {
             $response = $this->postService->deletePost($id);
             return $this->successResponse($response);
         } catch (\Throwable $th) {
-            return $this->errorResponse($th->getMessage()); 
+            return $this->errorResponse($th->getMessage());
         }
     }
 }

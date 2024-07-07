@@ -19,9 +19,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'content'=>$this->faker->text('200'),
-            'resume'=>$this->faker->sentence('60'),
-            'title'=>$this->faker->sentence('120'),
+            'content'=>$this->faker->text(200),
+            'resume'=>$this->faker->sentence(60),
+            'title'=>$this->faker->sentence(5),
             'slug'=>$this->faker->slug,
             'thumb'=>$this->faker->imageUrl(),
             'user_id'=>User::factory(),

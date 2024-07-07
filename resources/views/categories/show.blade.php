@@ -4,7 +4,8 @@
     <body>
         <main id="app">
             <main-menu home="{{ route('home') }}"></main-menu>
-            <content-page cat_id="null" category="null"></content-page>
+            <content-page cat_id="{{ $id }}" category="{{ $id }}"></content-page>
+            <a href="/" class="link">Voltar</a>
             <footer-page></footer-page>
         </main>
         <script src="{{ mix('js/app.js') }}"></script>

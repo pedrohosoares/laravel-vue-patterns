@@ -39,7 +39,7 @@ class PostControllerTest extends TestCase
     public function test_findSpecificPost()
     {
         $posts = Post::factory()->create();
-        $response = $this->get("/api/v1/posts/{$posts->id}");
+        $response = $this->get("/api/v1/posts/{$posts->slug}");
         $response->assertStatus(200);
         $response->assertJson([
             'success'=>true,
