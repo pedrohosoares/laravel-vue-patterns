@@ -1,7 +1,7 @@
 
 # Laravel Vue and Design Patterns
 
-This project will make with design patterns. Using Laravel 10 and VueJs.
+This project will make with design patterns. Using Laravel and VueJs.
 
 You can see the DDD in our project by folder Blog
 
