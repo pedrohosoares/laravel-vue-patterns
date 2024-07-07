@@ -14,6 +14,7 @@ Repositories, Services, Controllers, and Models related to our blog posts.
 - 6- Run the command: php artisan db:seed to populate the database.
 - 7- Run the command: php artisan serve to start the project.
 - 8- Access the blog at the base URL: http://localhost:8000.
+
 Note: The project doesn't have a visual interface for inserting or updating posts, but the CRUD methods are implemented.
 
 # You can run tests with:
