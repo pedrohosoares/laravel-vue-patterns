@@ -1,31 +1,28 @@
+# Laravel, Vue, and Design Patterns
 
-# Laravel Vue and Design Patterns
+This project will be made using design patterns, with Laravel and VueJs.
 
-This project will make with design patterns. Using Laravel and VueJs.
+- You can see the DDD (Domain-Driven Design) structure in our project in the Blog folder:
 
-You can see the DDD in our project by folder Blog
+Repositories, Services, Controllers, and Models related to our blog posts.
+## Installation Instructions
+- 1- Install Composer.
+- 2- In the project folder, run the command: composer install.
+- 3- Run the command: php artisan key:generate.
+- 4- Create a database named 'project-pedro-soares' and configure it in your .env file.
+- 5- Run the command: php artisan migrate.
+- 6- Run the command: php artisan db:seed to populate the database.
+- 7- Run the command: php artisan serve to start the project.
+- 8- Access the blog at the base URL: http://localhost:8000.
+Note: The project doesn't have a visual interface for inserting or updating posts, but the CRUD methods are implemented.
 
-- Repositories, Services, Controllers and Model about our blog posts.
+# You can run tests with:
 
-# To installing
-- 1 - Install composer
-- 2 - In folder of project, run the command composer install
-- 3 - Run the command: php artisan key:generate
-- 4 - Create a database with name project-pedro-soares and put configs in your .env.
-- 5 - Run the command php artisan migrate
-- 6 - Run the command php artisan db:seed to populate our database.
-- 7 - Run the php artisan serve
-- 8 - Look the blog in url base: http://localhost:8000
+php artisan test
 
-Obs: The project don't have a visual interface for insert or update the post in view, but, the methods CRUD are there.
+This project is an example of using Services, Repositories, and DDD, allowing you to view the folder structure and code organization.
 
-You can make tests with:
-- php artisan test
+Enjoy!
 
-This project is a example of Services, Repositories and DDD, so, you can view the structure of folders and code.
-
-Enjoy!!!
-
-Any doubt, contact me: pedrohosoares@gmail.com
-
+For any questions, contact me at: pedrohosoares@gmail.com
 
