@@ -4,7 +4,10 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'jquery';
+import 'popper.js';
 window.Vue = require('vue').default;
 
 /**
@@ -18,7 +21,6 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-
 const filtersFiles = require.context('./filters/', true, /\.js$/i);
 filtersFiles.keys().map(key => Vue.filter(key.split('/').pop().split('.')[0], filtersFiles(key).default));
 
@@ -26,7 +28,7 @@ const directivesFiles = require.context('./directives/', true, /\.js$/i);
 directivesFiles.keys().map(key => Vue.directive(key.split('/').pop().split('.')[0], directivesFiles(key).default));
 
 const componentsFiles = require.context('./components/', true, /\.vue$/i);
-componentsFiles.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], componentsFiles(key).default));
+componentsFiles.keys().map(key => {Vue.component(key.split('/').pop().split('.')[0], componentsFiles(key).default)});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
