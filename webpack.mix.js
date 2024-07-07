@@ -1,4 +1,5 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
+const { VueLoaderPlugin } = require('vue-loader');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,21 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.js("resources/js/app.js", "public/js")
     .vue()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass("resources/sass/app.scss", "public/css");
+mix.webpackConfig({
+    module: {
+        rules: [
+            {
+                test: /\.vue$/,
+                loader: "vue-loader",
+            },
+            {
+                test: /\.scss$/,
+                use: ["vue-style-loader", "css-loader", "sass-loader"],
+            },
+        ],
+    },
+    plugins: [new VueLoaderPlugin()],
+});
